@@ -1,18 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Simple Todo List with Next.js 14 and NextAuth.js
 
-## Getting Started
+<!-- ABOUT THE PROJECT -->
 
-First, run the development server:
+## About The Project
+
+### Co Inside: Your Personal Symphony of Productivity
+
+ Co Inside is a stock management app that helps you organize your stocks
+
+## Installed packages
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install next@14.0.0 react@18.2.0 react-dom@18.2.0 next-auth@5.0.0-beta.3 postcss@8.4.31 tailwindcss@3.3.3 typescript@5.2.2 use-debounce@10.0.0 zod@3.22.2 @vercel/postgres @mui/material @emotion/react bcryptjs@2.4.3 @types/bcryptjs@2.4.6 @heroicons/react@2.1.3 jose @tailwindcss/forms@0.5.6 autoprefixe@10.0.1
 ```
+
+#### generate a secret key for your application. This key is used to encrypt cookies, ensuring the security of user sessions. You can do this by running the following command in your terminal:
+```bash
+openssl rand -base64 32
+```
+
+### Built With
+
+This section list any major frameworks/libraries used in the project.
+
+https://nextjs.org/
+
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
