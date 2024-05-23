@@ -23,7 +23,7 @@ export default function Form() {
         <div className='flex flex-row text-center justify-center'>
           <h1
             // href='/signup'
-            className='ml-2 mb-3 mt-5 block text-center text-2xl font-medium text-white'
+            className='ml-2 mb-3 mt-5 block text-center text-2xl font-medium text-black'
           >
             Co Inside
           </h1>

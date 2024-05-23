@@ -19,6 +19,5 @@
 
 body {
   color: rgb(var(--violet-12));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
+  background: #e7e7e7
 }
