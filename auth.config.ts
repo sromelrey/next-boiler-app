@@ -1,37 +1,49 @@
 import type { NextAuthConfig } from "next-auth";
 import credentials from "next-auth/providers/credentials";
-const genralPath = [
-  "/about-us",
-  "/signin",
-  "/signup",
-  "/forgot-password",
-  "/contact-us",
+
+// Define public paths that can be accessed without authentication
+const publicPaths = [
+  '/login', 
+  '/about-us', 
+  '/signin', 
+  '/signup', 
+  '/forgot-password', 
+  '/contact-us'
 ];
-//* clean up this function
-export const authConfig = {
+
+export const authConfig: NextAuthConfig = {
   providers: [credentials],
   pages: {
-    signIn: "/login",
+    signIn: '/login'
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    async authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/stocks");
- 
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
-        return false;
-      } else if (isLoggedIn) {
-        console.log("You are logged in");
-        return Response.redirect(new URL("/stocks", nextUrl));
-      } else if (!isOnDashboard && !isLoggedIn) {
-        if (nextUrl.pathname.startsWith("/login")) return true;
-        else return false;
+      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      const isPublicPath = publicPaths.includes(nextUrl.pathname);
+
+      // If not logged in and trying to access a protected route, redirect to login
+      if (!isLoggedIn) {
+        if (nextUrl.pathname.startsWith('/login')) {
+          return true; // Allow access to login page
+        } else if (isOnDashboard) {
+          return false; // Block access to dashboard
+        } else {
+          return isPublicPath; // Allow access to public paths
+        }
       }
+
+      // If logged in and trying to access the login page, redirect to dashboard
+      if (isLoggedIn && nextUrl.pathname.startsWith('/login')) {
+        return Response.redirect(new URL('/dashboard', nextUrl));
+      }
+
+      // Allow access to all routes for logged-in users
       return true;
     },
     async session({ session, user }) {
+      // Customize session object if needed
       return session;
-    },
-  },
-} satisfies NextAuthConfig;
+    }
+  }
+};

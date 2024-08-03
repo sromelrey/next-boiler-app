@@ -1,23 +1,17 @@
-"use client";
+'use client';
 
-import {
-  UserGroupIcon,
-  HomeIcon,
-  DocumentDuplicateIcon,
-} from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+import { UserGroupIcon, HomeIcon, BellIcon, DocumentTextIcon, CogIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
+// Map of links
 const links = [
-  { name: "Home", href: "/dashboard", icon: HomeIcon },
-  {
-    name: "Stocks",
-    href: "/dashboard/stocks",
-    icon: DocumentDuplicateIcon,
-  },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Reports', href: '/reports', icon: DocumentTextIcon },
+  { name: 'Account', href: '/account', icon: UserGroupIcon },
+  { name: 'Notification', href: '/notification', icon: BellIcon },
+  { name: 'Settings', href: '/settings', icon: CogIcon }
 ];
 
 export default function NavLinks() {
@@ -25,21 +19,21 @@ export default function NavLinks() {
 
   return (
     <>
-      {links.map((link) => {
+      {links.map(link => {
         const LinkIcon = link.icon;
         return (
           <Link
             key={link.name}
-            href={link.href}
+            href={link.href} // Assuming internal links
             className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-zinc-100 hover:bg-zinc-500 hover:text-zinc-100 md:flex-none md:justify-start md:p-2 md:px-3',
               {
-                "bg-sky-100 text-blue-600": pathname === link.href,
+                'bg-zinc-500 text-zinc-100': pathname === link.href
               }
             )}
           >
-            <LinkIcon className='w-6' />
-            <p className='hidden md:block'>{link.name}</p>
+            <LinkIcon className="w-6" />
+            <p className="hidden md:block">{link.name}</p>
           </Link>
         );
       })}
